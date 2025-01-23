@@ -2,9 +2,9 @@
 
 ## BREAK DOWN TASK
     ### Task:
-        - ~Setup Sleep Tracker Repo~
+        - ~ Setup Sleep Tracker Repo ~
         - Config New Repo
-        - create DB Diagram
+        - ~create DB Diagram~
         - Create diagram Flow
         - Add table to project
         - Add Function
@@ -20,5 +20,7 @@
 
 ## How To Run
 ## DB Schema
+<img width="815" alt="image" src="https://github.com/user-attachments/assets/a1ade284-48b3-42f6-a3e9-caa0c25ebda3" />
+
 ## App Diagram Flow
 ## Functions
