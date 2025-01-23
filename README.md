@@ -4,7 +4,7 @@
         - Config New Repo
         - ~ create DB Diagram ~
         - ~ Create diagram Flow ~
-        - Add table to project
+        - ~ Add table to project (setup migration)~
         - Add Function
             - Api for record sleep
             - Api for record wakeup
