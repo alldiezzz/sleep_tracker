@@ -12,11 +12,18 @@ module SleepRecords
           return OpenStruct.new(success?: false, error: "Invalid event type.")
         end
 
-        debugger
-        sleep_session.sleep_events.create!(event_type: event_type, event_time: Time.current)
+        last_event = sleep_session.sleep_events.order(event_time: :desc).first
+        return OpenStruct.new(success?: false, error: "Invalid event sequence.") if last_event&.event_type == event_type
 
-        AutoEndSessionWorker.perform_in(1.hour, user.id, sleep_session.id) if event_type == "wakeup"
+        case event_type
+        when "fall_asleep"
+          duration_in_seconds = last_event&.event_type == "wake_up" ? Time.current - last_event.event_time : 0
+        else
+          duration_in_seconds = 0
+        end
 
+        sleep_session.sleep_events.create!(event_type: event_type, event_time: Time.current, duration_in_seconds: duration_in_seconds)
+        AutoEndSessionWorker.perform_in(1.hour, user.id, sleep_session.id) if event_type == "wake_up"
         OpenStruct.new(success?: true, data: { message: "Sleep event recorded.", session_id: sleep_session.id, event_type: event_type })
       rescue ActiveRecord::RecordInvalid => e
         OpenStruct.new(success?: false, error: e.message)

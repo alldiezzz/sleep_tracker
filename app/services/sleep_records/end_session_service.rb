@@ -7,7 +7,7 @@ module SleepRecords
       last_event = sleep_session.sleep_events.order(event_time: :desc).first
 
       if last_event.event_time < 1.minutes.ago
-        sleep_session.update!(end_time: Time.current)
+        sleep_session.update!(end_time: Time.current, total_duration_in_seconds: Time.current - sleep_session.start_time)
         Rails.cache.delete("sleep_session_id_#{user.id}")
       end
     end

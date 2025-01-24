@@ -1,4 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
+  before_action :set_user, only: [ :sleep_sessions, :followed_sleep_sessions ]
+
   def follow
     follow = Follow.find_or_initialize_by(
       follower_id: follow_params[:follower_id],
@@ -23,6 +25,14 @@ class Api::V1::UsersController < Api::V1::BaseController
     else
       render json: { error: "Follow relationship not found" }, status: :not_found
     end
+  end
+
+  def sleep_sessions
+    render json: @user.sleep_sessions
+  end
+
+  def followed_sleep_sessions
+    render json: @user.followed.map(&:sleep_sessions).flatten
   end
 
   private

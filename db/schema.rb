@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_23_110455) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_24_024842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_110455) do
     t.integer "duration_in_seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_type"], name: "index_sleep_events_on_event_type"
     t.index ["sleep_session_id"], name: "index_sleep_events_on_sleep_session_id"
   end
 

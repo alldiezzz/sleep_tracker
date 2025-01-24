@@ -1,0 +1,16 @@
+My Sleep Session list
+
+- @sleep_sessions.each do |sleep_session|
+  = sleep_session.id
+  = sleep_session.start_time
+  = sleep_session.end_time
+  = "#{ sleep.total_duration_in_minutes } minutes"
+
+
+My Follow list Sleep Session
+
+- @followed_sleep_sessions.each do |followed_sleep_session|
+  = followed_sleep_session.id
+  = followed_sleep_session.start_time
+  = followed_sleep_session.end_time
+  = "#{ followed_sleep_session.total_duration_in_minutes } minutes"

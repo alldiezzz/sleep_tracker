@@ -15,10 +15,15 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
-        resources :users, only: :create do
+        resources :users, only: :create, param: :user_id do
           collection do
             post :follow
             delete :unfollow
+          end
+
+          member do
+            get :sleep_sessions
+            get :followed_sleep_sessions
           end
         end
         resources :sleep_records, only: :create do

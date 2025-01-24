@@ -20,10 +20,4 @@ class Api::V1::SleepRecordsController < Api::V1::BaseController
       render json: { error: result.error }, status: :unprocessable_entity
     end
   end
-
-  private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
 end
