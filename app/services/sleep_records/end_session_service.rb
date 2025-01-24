@@ -12,7 +12,7 @@ module SleepRecords
 
         last_event = sleep_session.sleep_events.order(event_time: :desc).first
         if last_event&.event_type == "wake_up"
-          sleep_session.update!(end_time: Time.current, total_duration_in_seconds: Time.current - sleep_session.start_time)
+          sleep_session.update!(end_time: last_event.event_time, total_duration_in_seconds:  last_event.event_time - sleep_session.start_time)
           Rails.cache.delete(cache_key)
           OpenStruct.new(success?: true, data: { message: "Sleep session ended successfully.", session_id: sleep_session.id })
         end
