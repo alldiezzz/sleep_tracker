@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: [ :sleep_sessions, :followed_sleep_sessions ]
+  before_action :reindex_sleep_sessions, only: [ :sleep_sessions, :followed_sleep_sessions ]
 
   def follow
     follow = Follow.find_or_initialize_by(
@@ -28,11 +29,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def sleep_sessions
-    render json: @user.sleep_sessions
+    render json: IndexService.get("sleep_session_user_#{@user.id}")
   end
 
   def followed_sleep_sessions
-    render json: @user.followed.map(&:sleep_sessions).flatten
+    render json: @user.followed.map { |followed_user| IndexService.get("sleep_session_user_#{followed_user.id}") }.flatten
   end
 
   private
@@ -43,5 +44,9 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def follow_params
     params.require(:follow).permit(:follower_id, :followed_id)
+  end
+
+  def reindex_sleep_sessions
+    User.reindex_sleep_sessions
   end
 end
