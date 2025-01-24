@@ -22,6 +22,7 @@
 - Run `bundle install`
 - Run `rails db:migrate`
 - Run `rails db:seed`
+- update `.env.example` to `.env` and don't forget to update the DB credentials with your local creds
 - Run `sidekiq`
 - Run `rails s`
 
