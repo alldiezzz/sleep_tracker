@@ -21,6 +21,11 @@ Rails.application.routes.draw do
             delete :unfollow
           end
         end
+        resources :sleep_records, only: :create do
+          collection do
+            post :add_event
+          end
+        end
       end
     end
   end
