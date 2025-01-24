@@ -63,10 +63,12 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-rails"
 end
 
 group :development, :test do
   gem "dotenv-rails"
+  gem "factory_bot_rails"
 end
 
 gem "active_model_serializers", "~> 0.10.15"
